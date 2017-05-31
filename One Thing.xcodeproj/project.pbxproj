@@ -12,6 +12,9 @@
 		62BC93661EDF4CDC003F86F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BC93641EDF4CDC003F86F6 /* Main.storyboard */; };
 		62BC93681EDF4CDC003F86F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62BC93671EDF4CDC003F86F6 /* Assets.xcassets */; };
 		62BC936B1EDF4CDC003F86F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BC93691EDF4CDC003F86F6 /* LaunchScreen.storyboard */; };
+		62BC93751EDF5209003F86F6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC93741EDF5209003F86F6 /* Task.swift */; };
+		62BC937B1EDF5A76003F86F6 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC93791EDF5A76003F86F6 /* TaskCell.swift */; };
+		62BC937C1EDF5A76003F86F6 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62BC937A1EDF5A76003F86F6 /* TaskCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		62BC93671EDF4CDC003F86F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62BC936A1EDF4CDC003F86F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62BC936C1EDF4CDC003F86F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62BC93741EDF5209003F86F6 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
+		62BC93791EDF5A76003F86F6 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		62BC937A1EDF5A76003F86F6 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,41 @@
 		62BC935F1EDF4CDC003F86F6 /* One Thing */ = {
 			isa = PBXGroup;
 			children = (
-				62BC93601EDF4CDC003F86F6 /* AppDelegate.swift */,
-				62BC93621EDF4CDC003F86F6 /* ViewController.swift */,
-				62BC93641EDF4CDC003F86F6 /* Main.storyboard */,
+				62BC93781EDF523A003F86F6 /* Models */,
+				62BC93761EDF5222003F86F6 /* Controllers */,
+				62BC93771EDF522F003F86F6 /* Views */,
 				62BC93671EDF4CDC003F86F6 /* Assets.xcassets */,
-				62BC93691EDF4CDC003F86F6 /* LaunchScreen.storyboard */,
+				62BC93601EDF4CDC003F86F6 /* AppDelegate.swift */,
 				62BC936C1EDF4CDC003F86F6 /* Info.plist */,
 			);
 			path = "One Thing";
+			sourceTree = "<group>";
+		};
+		62BC93761EDF5222003F86F6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				62BC93621EDF4CDC003F86F6 /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		62BC93771EDF522F003F86F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62BC93641EDF4CDC003F86F6 /* Main.storyboard */,
+				62BC93791EDF5A76003F86F6 /* TaskCell.swift */,
+				62BC937A1EDF5A76003F86F6 /* TaskCell.xib */,
+				62BC93691EDF4CDC003F86F6 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		62BC93781EDF523A003F86F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				62BC93741EDF5209003F86F6 /* Task.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BC937C1EDF5A76003F86F6 /* TaskCell.xib in Resources */,
 				62BC936B1EDF4CDC003F86F6 /* LaunchScreen.storyboard in Resources */,
 				62BC93681EDF4CDC003F86F6 /* Assets.xcassets in Resources */,
 				62BC93661EDF4CDC003F86F6 /* Main.storyboard in Resources */,
@@ -137,7 +171,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BC937B1EDF5A76003F86F6 /* TaskCell.swift in Sources */,
 				62BC93631EDF4CDC003F86F6 /* ViewController.swift in Sources */,
+				62BC93751EDF5209003F86F6 /* Task.swift in Sources */,
 				62BC93611EDF4CDC003F86F6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +340,7 @@
 				62BC93711EDF4CDC003F86F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
