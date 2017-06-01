@@ -10,6 +10,9 @@ import UIKit
 
 class TaskCell: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +24,13 @@ class TaskCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    //MARK: User actions
+    @IBAction func selectPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func arrowPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func checkmarkPressed(_ sender: UIButton) {
+    }
 }

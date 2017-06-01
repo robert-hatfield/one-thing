@@ -25,24 +25,19 @@
                             <constraint firstAttribute="width" constant="48" id="kkW-pL-Gk2"/>
                             <constraint firstAttribute="height" constant="48" id="mSi-G1-8Pp"/>
                         </constraints>
-                        <state key="normal" title="Selected" image="target_inactive"/>
-                        <state key="selected" image="target_active"/>
+                        <state key="normal" title="Selection" image="task_default"/>
+                        <state key="selected" image="task_selected"/>
+                        <state key="highlighted" image="task_active"/>
+                        <connections>
+                            <action selector="selectPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LKJ-jV-lbM"/>
+                        </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5J-XC-d6b">
-                        <rect key="frame" x="64" y="8" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5J-XC-d6b">
+                        <rect key="frame" x="64" y="8" width="289" height="74"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npk-ve-DK4">
-                        <rect key="frame" x="361" y="49.5" width="32" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="32" id="bCI-5L-ucF"/>
-                            <constraint firstAttribute="width" constant="32" id="fay-9P-lpF"/>
-                        </constraints>
-                        <state key="normal" title="Arrow" image="arrow_down_tungsten"/>
-                        <state key="selected" image="arrow_done"/>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uO-ax-WNb">
                         <rect key="frame" x="361" y="8" width="32" height="32"/>
                         <constraints>
@@ -51,9 +46,25 @@
                         </constraints>
                         <state key="normal" title="Checkmark" image="checkmark_green"/>
                         <state key="selected" image="checkmark_done"/>
+                        <connections>
+                            <action selector="checkmarkPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MwR-r2-vgd"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npk-ve-DK4">
+                        <rect key="frame" x="361" y="49.5" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="bCI-5L-ucF"/>
+                            <constraint firstAttribute="width" constant="32" id="fay-9P-lpF"/>
+                        </constraints>
+                        <state key="normal" title="Arrow" image="arrow_down_tungsten"/>
+                        <state key="selected" image="arrow_done"/>
+                        <connections>
+                            <action selector="arrowPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebI-YO-Pzg"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="o5J-XC-d6b" secondAttribute="trailing" constant="8" id="I7z-ZO-7RY"/>
                     <constraint firstItem="cgP-YU-K7I" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JBc-Tg-9fI"/>
                     <constraint firstAttribute="leadingMargin" secondItem="cgP-YU-K7I" secondAttribute="leading" id="TKO-Vb-zvu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="npk-ve-DK4" secondAttribute="bottom" id="XkJ-hv-3hC"/>
@@ -64,6 +75,13 @@
                     <constraint firstAttribute="topMargin" secondItem="o5J-XC-d6b" secondAttribute="top" id="x8U-5f-YST"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="o5J-XC-d6b" secondAttribute="bottom" constant="8" id="blf-uJ-1li"/>
+            </constraints>
+            <connections>
+                <outlet property="label" destination="o5J-XC-d6b" id="pXp-HG-iyb"/>
+                <outlet property="selectButton" destination="cgP-YU-K7I" id="Eiw-ed-HNN"/>
+            </connections>
             <point key="canvasLocation" x="48.5" y="33"/>
         </tableViewCell>
     </objects>
@@ -72,7 +90,8 @@
         <image name="arrow_down_tungsten" width="100" height="100"/>
         <image name="checkmark_done" width="100" height="100"/>
         <image name="checkmark_green" width="100" height="100"/>
-        <image name="target_active" width="100" height="100"/>
-        <image name="target_inactive" width="100" height="100"/>
+        <image name="task_active" width="100" height="100"/>
+        <image name="task_default" width="100" height="100"/>
+        <image name="task_selected" width="100" height="100"/>
     </resources>
 </document>
