@@ -13,6 +13,14 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
+    var task: Task! {
+        didSet {
+            self.label.text = task.text
+            if task.isSelected { self.selectButton.isSelected = true }
+            if task.isCurrent { self.selectButton.isHighlighted = true }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
