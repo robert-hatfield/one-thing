@@ -10,12 +10,12 @@ import UIKit
 
 class TaskCell: UITableViewCell {
 
-    @IBOutlet weak var taskTextView: UITextView!
+    @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var selectButton: UIButton!
     
     var task: Task! {
         didSet {
-            self.taskTextView.text = task.text
+            self.taskTextField.text = task.text
             if task.isSelected { self.selectButton.isSelected = true }
             if task.isCurrent { self.selectButton.isHighlighted = true }
         }

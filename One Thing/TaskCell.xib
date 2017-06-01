@@ -56,29 +56,29 @@
                             <action selector="arrowPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebI-YO-Pzg"/>
                         </connections>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JiS-Jm-qVW">
-                        <rect key="frame" x="64" y="8" width="289" height="74"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28a-bE-i4v">
+                        <rect key="frame" x="56" y="8" width="305" height="73.5"/>
+                        <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="JiS-Jm-qVW" secondAttribute="bottom" constant="-0.5" id="2r2-pb-0rh"/>
-                    <constraint firstAttribute="topMargin" secondItem="JiS-Jm-qVW" secondAttribute="top" id="AlI-RO-3K8"/>
-                    <constraint firstItem="JiS-Jm-qVW" firstAttribute="leading" secondItem="cgP-YU-K7I" secondAttribute="trailing" constant="8" id="CbM-Ul-W6e"/>
+                    <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="28a-bE-i4v" secondAttribute="trailing" id="1ND-bJ-Cc4"/>
+                    <constraint firstItem="28a-bE-i4v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="DpS-6m-IAz"/>
                     <constraint firstItem="cgP-YU-K7I" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JBc-Tg-9fI"/>
-                    <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="JiS-Jm-qVW" secondAttribute="trailing" constant="8" id="PGa-5u-VlA"/>
+                    <constraint firstItem="28a-bE-i4v" firstAttribute="leading" secondItem="cgP-YU-K7I" secondAttribute="trailing" id="Mzj-bI-hVM"/>
                     <constraint firstAttribute="leadingMargin" secondItem="cgP-YU-K7I" secondAttribute="leading" id="TKO-Vb-zvu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="npk-ve-DK4" secondAttribute="bottom" id="XkJ-hv-3hC"/>
                     <constraint firstAttribute="trailingMargin" secondItem="npk-ve-DK4" secondAttribute="trailing" id="k4f-so-ABx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="28a-bE-i4v" secondAttribute="bottom" id="ngK-Eg-E1K"/>
                     <constraint firstAttribute="trailingMargin" secondItem="2uO-ax-WNb" secondAttribute="trailing" id="p3Z-ML-GBp"/>
                     <constraint firstAttribute="topMargin" secondItem="2uO-ax-WNb" secondAttribute="top" id="wSF-Pt-ztb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="selectButton" destination="cgP-YU-K7I" id="Eiw-ed-HNN"/>
-                <outlet property="taskTextView" destination="JiS-Jm-qVW" id="zcm-Ri-aVI"/>
+                <outlet property="taskTextField" destination="28a-bE-i4v" id="VZv-MU-iku"/>
             </connections>
             <point key="canvasLocation" x="48.5" y="33"/>
         </tableViewCell>
