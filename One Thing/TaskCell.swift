@@ -11,13 +11,13 @@ import UIKit
 class TaskCell: UITableViewCell {
 
     @IBOutlet weak var taskTextField: UITextField!
-    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var taskImageView: UIImageView!
     
     var task: Task! {
         didSet {
             self.taskTextField.text = task.text
-            if task.isSelected { self.selectButton.isSelected = true }
-            if task.isCurrent { self.selectButton.isHighlighted = true }
+            if task.isSelected { self.isSelected = true }
+            if task.isCurrent { self.taskImageView.image = #imageLiteral(resourceName: "task_active") }
         }
     }
     
@@ -30,18 +30,22 @@ class TaskCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.selectButton.imageView?.image = #imageLiteral(resourceName: "task_selected")
+        if selected {
+            self.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+        } else {
+            self.taskImageView.image = #imageLiteral(resourceName: "task_default")
+        }
+        self.task.isSelected = selected
+        print("Cell selected: ")
     }
     
     //MARK: User actions
-    @IBAction func selectPressed(_ sender: UIButton) {
-        self.setSelected(true, animated: true)
-        self.task.isSelected = true
-    }
     
     @IBAction func arrowPressed(_ sender: UIButton) {
+        print("Arrow pressed")
     }
     
     @IBAction func checkmarkPressed(_ sender: UIButton) {
+        print("Checkmark pressed")
     }
 }

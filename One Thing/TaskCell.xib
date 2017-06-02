@@ -19,19 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="401" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgP-YU-K7I">
-                        <rect key="frame" x="8" y="21" width="48" height="48"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="kkW-pL-Gk2"/>
-                            <constraint firstAttribute="height" constant="48" id="mSi-G1-8Pp"/>
-                        </constraints>
-                        <state key="normal" title="Selection" image="task_default"/>
-                        <state key="selected" image="task_selected"/>
-                        <state key="highlighted" image="task_active"/>
-                        <connections>
-                            <action selector="selectPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LKJ-jV-lbM"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uO-ax-WNb">
                         <rect key="frame" x="361" y="8" width="32" height="32"/>
                         <constraints>
@@ -57,27 +44,34 @@
                         </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter task description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28a-bE-i4v">
-                        <rect key="frame" x="56" y="8" width="305" height="73.5"/>
+                        <rect key="frame" x="56" y="8" width="305" height="30"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_default" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-Ws-dp9" userLabel="Task Image">
+                        <rect key="frame" x="8" y="21" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="nLx-an-kpX"/>
+                            <constraint firstAttribute="width" constant="48" id="nrW-6S-7HM"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="28a-bE-i4v" secondAttribute="trailing" id="1ND-bJ-Cc4"/>
+                    <constraint firstItem="npk-ve-DK4" firstAttribute="top" secondItem="2uO-ax-WNb" secondAttribute="bottom" constant="9.5" id="2j7-hX-gEb"/>
                     <constraint firstItem="28a-bE-i4v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="DpS-6m-IAz"/>
-                    <constraint firstItem="cgP-YU-K7I" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JBc-Tg-9fI"/>
-                    <constraint firstItem="28a-bE-i4v" firstAttribute="leading" secondItem="cgP-YU-K7I" secondAttribute="trailing" id="Mzj-bI-hVM"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="cgP-YU-K7I" secondAttribute="leading" id="TKO-Vb-zvu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="npk-ve-DK4" secondAttribute="bottom" id="XkJ-hv-3hC"/>
+                    <constraint firstItem="pkq-Ws-dp9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cIj-oc-HCN"/>
+                    <constraint firstItem="pkq-Ws-dp9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cWd-Gw-z0I"/>
+                    <constraint firstItem="28a-bE-i4v" firstAttribute="leading" secondItem="pkq-Ws-dp9" secondAttribute="trailing" id="g76-6i-0YK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="npk-ve-DK4" secondAttribute="trailing" id="k4f-so-ABx"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="28a-bE-i4v" secondAttribute="bottom" id="ngK-Eg-E1K"/>
                     <constraint firstAttribute="trailingMargin" secondItem="2uO-ax-WNb" secondAttribute="trailing" id="p3Z-ML-GBp"/>
                     <constraint firstAttribute="topMargin" secondItem="2uO-ax-WNb" secondAttribute="top" id="wSF-Pt-ztb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="selectButton" destination="cgP-YU-K7I" id="Eiw-ed-HNN"/>
+                <outlet property="taskImageView" destination="pkq-Ws-dp9" id="ZfT-ka-ap9"/>
                 <outlet property="taskTextField" destination="28a-bE-i4v" id="VZv-MU-iku"/>
             </connections>
             <point key="canvasLocation" x="48.5" y="33"/>
@@ -88,8 +82,6 @@
         <image name="arrow_down_tungsten" width="100" height="100"/>
         <image name="checkmark_done" width="100" height="100"/>
         <image name="checkmark_green" width="100" height="100"/>
-        <image name="task_active" width="100" height="100"/>
         <image name="task_default" width="100" height="100"/>
-        <image name="task_selected" width="100" height="100"/>
     </resources>
 </document>

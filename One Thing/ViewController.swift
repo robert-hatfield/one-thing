@@ -54,6 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         self.tasksTableView.endUpdates()
         self.tasksTableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
         let newCell = self.tasksTableView.cellForRow(at: lastIndexPath) as! TaskCell
+        newCell.taskTextField.delegate = self
         newCell.taskTextField.becomeFirstResponder()
     }
 }
@@ -62,6 +63,18 @@ extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
         selectedCell.setSelected(true, animated: true)
-        selectedCell.taskTextField.becomeFirstResponder()
     }
+}
+
+extension ViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("Done editing")
+        return true
+    }
+
 }
