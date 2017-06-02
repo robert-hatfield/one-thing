@@ -28,15 +28,6 @@ class TaskCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        self.selectionStyle = UITableViewCellSelectionStyle.none
-        if selected {
-            self.taskImageView.image = #imageLiteral(resourceName: "task_selected")
-        } else {
-            self.taskImageView.image = #imageLiteral(resourceName: "task_default")
-        }
-        self.task.isSelected = selected
-        print("Cell selected: ")
     }
     
     //MARK: User actions
