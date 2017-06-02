@@ -28,12 +28,15 @@ class TaskCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectButton.imageView?.image = #imageLiteral(resourceName: "task_selected")
     }
     
     //MARK: User actions
     @IBAction func selectPressed(_ sender: UIButton) {
+        self.setSelected(true, animated: true)
+        self.task.isSelected = true
     }
     
     @IBAction func arrowPressed(_ sender: UIButton) {

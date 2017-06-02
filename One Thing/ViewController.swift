@@ -39,13 +39,29 @@ class ViewController: UIViewController, UITableViewDataSource {
         cell.task = task
         return cell
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     @IBAction func addTaskPressed(_ sender: UIButton) {
+        var newTask = Task(text: "")
+        self.tasksTableView.beginUpdates()
+        self.allTasks.append(newTask)
+        
+        let lastRow = self.tasksTableView.numberOfRows(inSection: 0)
+        let lastIndexPath = IndexPath(row: lastRow, section: 0)
+        
+        
+        self.tasksTableView.insertRows(at: [lastIndexPath], with: UITableViewRowAnimation.automatic)
+        
+        self.tasksTableView.endUpdates()
+        self.tasksTableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
+        let newCell = self.tasksTableView.cellForRow(at: lastIndexPath) as! TaskCell
+        newCell.taskTextField.becomeFirstResponder()
     }
 }
 
+extension ViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
+        selectedCell.setSelected(true, animated: true)
+        selectedCell.taskTextField.becomeFirstResponder()
+    }
+}
