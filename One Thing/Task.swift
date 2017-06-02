@@ -32,12 +32,12 @@ class Task: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        guard var text = aDecoder.decodeObject(forKey: "text") as? String else {
+        guard let text = aDecoder.decodeObject(forKey: "text") as? String else {
             NSLog("Unable to decode name for task.")
             return nil
         }
-        var isSelected = aDecoder.decodeBool(forKey: "isSelected")
-        var isCurrent = aDecoder.decodeBool(forKey: "isCurrent")
+        let isSelected = aDecoder.decodeBool(forKey: "isSelected")
+        let isCurrent = aDecoder.decodeBool(forKey: "isCurrent")
         
         self.init(text: text)
         self.isSelected = isSelected
