@@ -34,18 +34,21 @@ class ViewController: UIViewController {
     
     //MARK: User actions
     @IBAction func addTaskPressed(_ sender: UIButton) {
-        let newTask = Task(text: "")
+        
         self.tasksTableView.beginUpdates()
+        let lastIndexPath = IndexPath(row: self.allTasks.count, section: 0)
+        let newTask = Task(text: "")
         self.allTasks.append(newTask)
-        
-        let lastRow = self.tasksTableView.numberOfRows(inSection: 0)
-        let lastIndexPath = IndexPath(row: lastRow, section: 0)
-        
-        
-        self.tasksTableView.insertRows(at: [lastIndexPath], with: UITableViewRowAnimation.automatic)
-        
+        self.tasksTableView.insertRows(at: [lastIndexPath], with: .bottom)
         self.tasksTableView.endUpdates()
+        
+        self.tasksTableView.beginUpdates()
+        
+        self.tasksTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        self.tasksTableView.endUpdates()
+        
         self.tasksTableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
+        
         let newCell = self.tasksTableView.cellForRow(at: lastIndexPath) as! TaskCell
         newCell.taskTextField.delegate = self
         newCell.taskTextField.becomeFirstResponder()
@@ -94,5 +97,4 @@ extension ViewController : UITextFieldDelegate {
         print("Done editing")
         return true
     }
-
 }
