@@ -13,7 +13,6 @@ class Task: NSObject, NSCoding {
     //MARK: Properties
     var text : String
     var isSelected = false
-    var isCurrent = false
     
     //MARK: Archiving
     static let DocumentDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -28,7 +27,6 @@ class Task: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(text, forKey: "text")
         aCoder.encode(isSelected, forKey: "isSelected")
-        aCoder.encode(isCurrent, forKey: "isCurrent")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -37,10 +35,8 @@ class Task: NSObject, NSCoding {
             return nil
         }
         let isSelected = aDecoder.decodeBool(forKey: "isSelected")
-        let isCurrent = aDecoder.decodeBool(forKey: "isCurrent")
         
         self.init(text: text)
         self.isSelected = isSelected
-        self.isCurrent = isCurrent
     }
 }

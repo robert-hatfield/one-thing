@@ -20,6 +20,7 @@ class ViewController: UIViewController {
             self.tasksTableView.reloadData()
         }
     }
+    var activeTaskIndex : Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
         self.tasksTableView.estimatedRowHeight = 50
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
     }
-    
+
 }
 
 //MARK: UITableView extension
@@ -46,6 +47,12 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         let task = self.allTasks[indexPath.row]
         cell.task = task
+        if task.isSelected {
+            cell.setSelected(true, animated: false)
+        }
+        if self.activeTaskIndex == indexPath.row {
+            cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+        }
         return cell
     }
     

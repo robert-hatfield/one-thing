@@ -17,7 +17,6 @@ class TaskCell: UITableViewCell {
         didSet {
             self.taskTextField.text = task.text
             if task.isSelected { self.isSelected = true }
-            if task.isCurrent { self.taskImageView.image = #imageLiteral(resourceName: "task_active") }
         }
     }
     
