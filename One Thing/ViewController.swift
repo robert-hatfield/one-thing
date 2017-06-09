@@ -60,6 +60,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
         selectedCell.task.isSelected = true
         selectedCell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+        self.allTasks[indexPath.row].isSelected = true
         print("Cell selected in delegate method")
     }
     
@@ -67,8 +68,8 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         let deselectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
         deselectedCell.task.isSelected = false
         deselectedCell.taskImageView.image = #imageLiteral(resourceName: "task_default")
+        self.allTasks[indexPath.row].isSelected = false
         print("Cell DEselected in delegate method")
-
     }
 }
 
