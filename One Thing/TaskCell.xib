@@ -12,18 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="TaskCell" customModule="One_Thing" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="401" height="90"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="TaskCell" customModule="One_Thing" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="401" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="401" height="89.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="401" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uO-ax-WNb">
-                        <rect key="frame" x="361" y="8" width="32" height="32"/>
+                        <rect key="frame" x="349" y="6.5" width="44" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="32" id="3V5-jc-EHQ"/>
-                            <constraint firstAttribute="height" constant="32" id="ZOF-gD-LU5"/>
+                            <constraint firstAttribute="width" constant="44" id="3V5-jc-EHQ"/>
+                            <constraint firstAttribute="height" constant="44" id="ZOF-gD-LU5"/>
                         </constraints>
                         <state key="normal" title="Checkmark" image="checkmark_green"/>
                         <state key="selected" image="checkmark_done"/>
@@ -31,11 +31,18 @@
                             <action selector="checkmarkPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MwR-r2-vgd"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npk-ve-DK4">
-                        <rect key="frame" x="361" y="49.5" width="32" height="32"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_default" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-Ws-dp9" userLabel="Task Image">
+                        <rect key="frame" x="8" y="27" width="44" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="bCI-5L-ucF"/>
-                            <constraint firstAttribute="width" constant="32" id="fay-9P-lpF"/>
+                            <constraint firstAttribute="height" constant="44" id="nLx-an-kpX"/>
+                            <constraint firstAttribute="width" constant="44" id="nrW-6S-7HM"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npk-ve-DK4">
+                        <rect key="frame" x="349" y="48" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="bCI-5L-ucF"/>
+                            <constraint firstAttribute="width" constant="44" id="fay-9P-lpF"/>
                         </constraints>
                         <state key="normal" title="Arrow" image="arrow_down_tungsten"/>
                         <state key="selected" image="arrow_done"/>
@@ -44,28 +51,22 @@
                         </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter task description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28a-bE-i4v">
-                        <rect key="frame" x="56" y="8" width="305" height="30"/>
+                        <rect key="frame" x="60" y="34" width="281" height="30"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_default" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-Ws-dp9" userLabel="Task Image">
-                        <rect key="frame" x="8" y="21" width="48" height="48"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="48" id="nLx-an-kpX"/>
-                            <constraint firstAttribute="width" constant="48" id="nrW-6S-7HM"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="28a-bE-i4v" secondAttribute="trailing" id="1ND-bJ-Cc4"/>
-                    <constraint firstItem="npk-ve-DK4" firstAttribute="top" secondItem="2uO-ax-WNb" secondAttribute="bottom" constant="9.5" id="2j7-hX-gEb"/>
-                    <constraint firstItem="28a-bE-i4v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="DpS-6m-IAz"/>
+                    <constraint firstItem="2uO-ax-WNb" firstAttribute="leading" secondItem="28a-bE-i4v" secondAttribute="trailing" constant="8" id="1ND-bJ-Cc4"/>
+                    <constraint firstItem="npk-ve-DK4" firstAttribute="top" secondItem="2uO-ax-WNb" secondAttribute="bottom" constant="-2.5" id="2j7-hX-gEb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="npk-ve-DK4" secondAttribute="bottom" id="XkJ-hv-3hC"/>
                     <constraint firstItem="pkq-Ws-dp9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cIj-oc-HCN"/>
                     <constraint firstItem="pkq-Ws-dp9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cWd-Gw-z0I"/>
-                    <constraint firstItem="28a-bE-i4v" firstAttribute="leading" secondItem="pkq-Ws-dp9" secondAttribute="trailing" id="g76-6i-0YK"/>
+                    <constraint firstAttribute="topMargin" secondItem="28a-bE-i4v" secondAttribute="top" constant="-26" id="fOD-1r-c7f"/>
+                    <constraint firstItem="28a-bE-i4v" firstAttribute="leading" secondItem="pkq-Ws-dp9" secondAttribute="trailing" constant="8" id="g76-6i-0YK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="npk-ve-DK4" secondAttribute="trailing" id="k4f-so-ABx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="28a-bE-i4v" secondAttribute="bottom" constant="27.5" id="ovd-Fl-Kc6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="2uO-ax-WNb" secondAttribute="trailing" id="p3Z-ML-GBp"/>
                     <constraint firstAttribute="topMargin" secondItem="2uO-ax-WNb" secondAttribute="top" id="wSF-Pt-ztb"/>
                 </constraints>
@@ -74,7 +75,7 @@
                 <outlet property="taskImageView" destination="pkq-Ws-dp9" id="ZfT-ka-ap9"/>
                 <outlet property="taskTextField" destination="28a-bE-i4v" id="VZv-MU-iku"/>
             </connections>
-            <point key="canvasLocation" x="48.5" y="33"/>
+            <point key="canvasLocation" x="48.5" y="38"/>
         </tableViewCell>
     </objects>
     <resources>

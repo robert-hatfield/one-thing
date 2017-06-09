@@ -32,27 +32,6 @@ class ViewController: UIViewController {
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    //MARK: User actions
-    @IBAction func addTaskPressed(_ sender: UIButton) {
-        
-        self.tasksTableView.beginUpdates()
-        let lastIndexPath = IndexPath(row: self.allTasks.count, section: 0)
-        let newTask = Task(text: "")
-        self.allTasks.append(newTask)
-        self.tasksTableView.insertRows(at: [lastIndexPath], with: .bottom)
-        self.tasksTableView.endUpdates()
-        
-        self.tasksTableView.beginUpdates()
-        
-        self.tasksTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        self.tasksTableView.endUpdates()
-        
-        self.tasksTableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
-        
-        let newCell = self.tasksTableView.cellForRow(at: lastIndexPath) as! TaskCell
-        newCell.taskTextField.delegate = self
-        newCell.taskTextField.becomeFirstResponder()
-    }
 }
 
 //MARK: UITableView extension
