@@ -10,23 +10,60 @@ import UIKit
 
 class NewTaskViewController: UIViewController {
 
+    @IBOutlet weak var taskTextField: UITextField!
+    var mainVC : ViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.mainVC = (self.navigationController?.viewControllers.first as? ViewController)!
+        self.taskTextField.becomeFirstResponder()
     }
 
-    
-    
-
-    
-     //MARK: Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func addButtonPressed(_ sender: Any) {
+        guard let text = taskTextField.text, text != "" else { return }
+        
+        addTask(text)
+        self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func startButtonPressed(_ sender: Any) {
+        guard let text = taskTextField.text, text != "" else { return }
+        
+        // If there is already an active task, remove its indicator
+        if let priorActiveIndex = mainVC?.activeTaskIndex {
+            let indexPath = IndexPath(row: priorActiveIndex, section: 0)
+            let priorActiveCell = mainVC?.tasksTableView.cellForRow(at: indexPath) as? TaskCell
+            if let priorTask = mainVC?.allTasks[priorActiveIndex], priorTask.isSelected == true {
+                priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+            } else {
+                priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_default")
+            }
+        }
+        
+        addTask(text)
+        
+        guard let newTask = self.mainVC?.allTasks.last else { return }
+        newTask.isSelected = true
+        mainVC?.activeTaskIndex = (mainVC?.allTasks.count)! - 1
+        
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func addTask(_ text : String) {
+        let newTask = Task(text: text)
+        self.mainVC?.allTasks.append(newTask)
+    }
+    
+}
 
+extension NewTaskViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        guard let text = textField.text, text != "" else { return false }
+        
+        addTask(text)
+        textField.text = ""
+        return true
+    }
 }
