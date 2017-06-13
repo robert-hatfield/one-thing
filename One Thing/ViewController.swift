@@ -133,6 +133,10 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         
         cell.arrowButton.tag = indexPath.row
         cell.arrowButton.addTarget(self, action: #selector(ViewController.taskWorked), for: UIControlEvents.touchUpInside)
+        
+        cell.taskTextField.tag = indexPath.row
+        cell.taskTextField.delegate = self
+        
         return cell
     }
     
@@ -168,7 +172,15 @@ extension ViewController : UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("Done editing")
+        print("Done editing in cell \(textField.tag)")
+        let editedTaskIndex = textField.tag
+        guard let newText = textField.text else { return false }
+        if newText != allTasks[editedTaskIndex].text && newText != "" {
+            allTasks[editedTaskIndex].text = newText
+            saveTasks()
+        } else {
+           textField.text = allTasks[editedTaskIndex].text
+        }
         return true
     }
 }
