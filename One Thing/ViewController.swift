@@ -38,6 +38,17 @@ class ViewController: UIViewController {
             checkActiveTask()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
     func checkActiveTask() {
         guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }

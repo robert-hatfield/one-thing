@@ -25,6 +25,7 @@ class NewTaskViewController: UIViewController {
         
         addTask(text)
         self.mainVC?.saveTasks()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -49,6 +50,7 @@ class NewTaskViewController: UIViewController {
         mainVC?.activeTasks.append((mainVC?.allTasks.count)! - 1)
         
         self.mainVC?.saveTasks()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
