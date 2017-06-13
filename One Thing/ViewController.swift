@@ -51,6 +51,15 @@ class ViewController: UIViewController {
             
         }
     }
+    
+    //MARK: User actions
+    func taskCompleted(sender: UIButton) {
+        print("Task completed for index \(sender.tag)")
+    }
+    
+    func taskWorked(sender: UIButton) {
+        print("Task \(sender.tag) worked, move to end")
+    }
 }
 
 //MARK: UITableView extension
@@ -71,6 +80,12 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         if self.activeTaskIndex == indexPath.row {
             cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
         }
+        
+        cell.checkmarkButton.tag = indexPath.row
+        cell.checkmarkButton.addTarget(self, action: #selector(ViewController.taskCompleted), for: UIControlEvents.touchUpInside)
+        
+        cell.arrowButton.tag = indexPath.row
+        cell.arrowButton.addTarget(self, action: #selector(ViewController.taskWorked), for: UIControlEvents.touchUpInside)
         return cell
     }
     

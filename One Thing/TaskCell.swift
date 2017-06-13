@@ -12,6 +12,8 @@ class TaskCell: UITableViewCell {
 
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var taskImageView: UIImageView!
+    @IBOutlet weak var checkmarkButton: UIButton!
+    @IBOutlet weak var arrowButton: UIButton!
     
     var task: Task! {
         didSet {
@@ -29,13 +31,4 @@ class TaskCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    //MARK: User actions
-    
-    @IBAction func arrowPressed(_ sender: UIButton) {
-        print("Arrow pressed")
-    }
-    
-    @IBAction func checkmarkPressed(_ sender: UIButton) {
-        print("Checkmark pressed")
-    }
 }

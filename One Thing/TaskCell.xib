@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,9 +27,6 @@
                         </constraints>
                         <state key="normal" title="Checkmark" image="checkmark_green"/>
                         <state key="selected" image="checkmark_done"/>
-                        <connections>
-                            <action selector="checkmarkPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MwR-r2-vgd"/>
-                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_default" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-Ws-dp9" userLabel="Task Image">
                         <rect key="frame" x="8" y="27" width="44" height="44"/>
@@ -46,9 +43,6 @@
                         </constraints>
                         <state key="normal" title="Arrow" image="arrow_down_tungsten"/>
                         <state key="selected" image="arrow_done"/>
-                        <connections>
-                            <action selector="arrowPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebI-YO-Pzg"/>
-                        </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter task description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28a-bE-i4v">
                         <rect key="frame" x="60" y="34" width="281" height="30"/>
@@ -72,6 +66,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowButton" destination="npk-ve-DK4" id="GRO-Hh-BHh"/>
+                <outlet property="checkmarkButton" destination="2uO-ax-WNb" id="pJ3-9k-Fql"/>
                 <outlet property="taskImageView" destination="pkq-Ws-dp9" id="ZfT-ka-ap9"/>
                 <outlet property="taskTextField" destination="28a-bE-i4v" id="VZv-MU-iku"/>
             </connections>
