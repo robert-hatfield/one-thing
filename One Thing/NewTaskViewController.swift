@@ -31,7 +31,7 @@ class NewTaskViewController: UIViewController {
         guard let text = taskTextField.text, text != "" else { return }
         
         // If there is already an active task, remove its indicator
-        if let priorActiveIndex = mainVC?.activeTaskIndex {
+        if let priorActiveIndex = mainVC?.activeTasks.last {
             let indexPath = IndexPath(row: priorActiveIndex, section: 0)
             let priorActiveCell = mainVC?.tasksTableView.cellForRow(at: indexPath) as? TaskCell
             if let priorTask = mainVC?.allTasks[priorActiveIndex], priorTask.isSelected == true {
@@ -45,7 +45,7 @@ class NewTaskViewController: UIViewController {
         
         guard let newTask = self.mainVC?.allTasks.last else { return }
         newTask.isSelected = true
-        mainVC?.activeTaskIndex = (mainVC?.allTasks.count)! - 1
+        mainVC?.activeTasks.append((mainVC?.allTasks.count)! - 1)
         
         
         self.navigationController?.popViewController(animated: true)

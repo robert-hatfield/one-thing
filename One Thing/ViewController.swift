@@ -20,7 +20,7 @@ class ViewController: UIViewController {
             self.tasksTableView.reloadData()
         }
     }
-    var activeTaskIndex : Int?
+    var activeTasks = [Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,9 @@ class ViewController: UIViewController {
             
             switch self.allTasks[indexPath.row].isSelected {
             case true:
-                if indexPath.row == self.activeTaskIndex || self.activeTaskIndex == nil {
+                if indexPath.row == self.activeTasks.last || self.activeTasks.last == nil {
                     cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+                    self.activeTasks.append(indexPath.row)
                 } else {
                     cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
                 }
@@ -55,6 +56,8 @@ class ViewController: UIViewController {
     //MARK: User actions
     func taskCompleted(sender: UIButton) {
         print("Task completed for index \(sender.tag)")
+        allTasks.remove(at: sender.tag)
+        self.tasksTableView.reloadData()
     }
     
     func taskWorked(sender: UIButton) {
@@ -77,7 +80,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         if task.isSelected {
             cell.setSelected(true, animated: false)
         }
-        if self.activeTaskIndex == indexPath.row {
+        if self.activeTasks.last == indexPath.row {
             cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
         }
         
@@ -94,8 +97,8 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         selectedCell.task.isSelected = true
         selectedCell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
         self.allTasks[indexPath.row].isSelected = true
-        if self.activeTaskIndex == nil || indexPath.row > self.activeTaskIndex! {
-            activeTaskIndex = indexPath.row
+        if self.activeTasks.last == nil || indexPath.row > self.activeTasks.last! {
+            activeTasks.append(indexPath.row)
         }
         print("Cell selected in delegate method")
         checkActiveTask()
@@ -109,10 +112,10 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         
         // reset task index
         var index = 0
-        self.activeTaskIndex = nil
+        self.activeTasks.removeAll()
         for task in allTasks {
             if task.isSelected {
-                self.activeTaskIndex = index
+                self.activeTasks.append(index)
             }
             index += 1
         }
