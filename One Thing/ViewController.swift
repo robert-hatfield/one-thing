@@ -20,6 +20,7 @@ class ViewController: UIViewController {
             self.tasksTableView.reloadData()
         }
     }
+    var activeTasks = [Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,27 +32,55 @@ class ViewController: UIViewController {
         self.tasksTableView.estimatedRowHeight = 50
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
     }
+
+    func checkActiveTask() {
+        guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
+        
+        // Reset activeTasks array; row assignments have changed
+        self.activeTasks.removeAll()
+        var index = 0
+            for task in allTasks {
+                if task.isSelected {
+                    self.activeTasks.append(index)
+                }
+            index += 1
+        }
+        
+        for indexPath in indexPaths {
+            let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
+            
+            switch self.allTasks[indexPath.row].isSelected {
+            case true:
+                if indexPath.row == self.activeTasks.last {
+                    cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+                } else {
+                    cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+                }
+            case false:
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_default")
+            }
+            
+        }
+        print(activeTasks)
+    }
     
     //MARK: User actions
-    @IBAction func addTaskPressed(_ sender: UIButton) {
-        
-        self.tasksTableView.beginUpdates()
-        let lastIndexPath = IndexPath(row: self.allTasks.count, section: 0)
-        let newTask = Task(text: "")
-        self.allTasks.append(newTask)
-        self.tasksTableView.insertRows(at: [lastIndexPath], with: .bottom)
-        self.tasksTableView.endUpdates()
-        
-        self.tasksTableView.beginUpdates()
-        
-        self.tasksTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        self.tasksTableView.endUpdates()
-        
-        self.tasksTableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.top)
-        
-        let newCell = self.tasksTableView.cellForRow(at: lastIndexPath) as! TaskCell
-        newCell.taskTextField.delegate = self
-        newCell.taskTextField.becomeFirstResponder()
+    func taskCompleted(sender: UIButton) {
+        print("Task completed for index \(sender.tag)")
+        allTasks.remove(at: sender.tag)
+        self.tasksTableView.reloadData()
+        checkActiveTask()
+    }
+    
+    func taskWorked(sender: UIButton) {
+        print("Task \(sender.tag) worked, move to end")
+        self.allTasks[sender.tag].isSelected = false
+        allTasks.append(allTasks.remove(at: sender.tag))
+        if let oldIndex = self.activeTasks.index(of: sender.tag) {
+            self.activeTasks.remove(at: oldIndex)
+        }
+        self.tasksTableView.reloadData()
+        checkActiveTask()
     }
 }
 
@@ -67,23 +96,47 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         let task = self.allTasks[indexPath.row]
         cell.task = task
+        
+        switch task.isSelected {
+        case true:
+            if indexPath.row == self.activeTasks.last {
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+            } else {
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+            }
+        case false:
+            cell.taskImageView.image = #imageLiteral(resourceName: "task_default")
+        }
+
+        cell.checkmarkButton.tag = indexPath.row
+        cell.checkmarkButton.addTarget(self, action: #selector(ViewController.taskCompleted), for: UIControlEvents.touchUpInside)
+        
+        cell.arrowButton.tag = indexPath.row
+        cell.arrowButton.addTarget(self, action: #selector(ViewController.taskWorked), for: UIControlEvents.touchUpInside)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
-        selectedCell.task.isSelected = true
-        selectedCell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
-        print("Cell selected in delegate method")
+        let selectedTask = self.allTasks[indexPath.row]
+        
+        // Toggle selection state of task
+        selectedTask.isSelected = !selectedTask.isSelected
+        if selectedTask.isSelected {
+            if !self.activeTasks.contains(indexPath.row) {
+                self.activeTasks.append(indexPath.row)
+            }
+        } else {
+            if let activeTaskIndex = self.activeTasks.index(of: indexPath.row) {
+                self.activeTasks.remove(at: activeTaskIndex)
+            }
+        }
+        
+        self.activeTasks.sort()
+        selectedCell.isSelected = false
+        checkActiveTask()
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let deselectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
-        deselectedCell.task.isSelected = false
-        deselectedCell.taskImageView.image = #imageLiteral(resourceName: "task_default")
-        print("Cell DEselected in delegate method")
-
-    }
 }
 
 //MARK: UITextField extension

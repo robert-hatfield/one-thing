@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eaP-CI-y8P">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="BYZ-38-t0r" customClass="ViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,24 +23,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
-                                <rect key="frame" x="16" y="28" width="343" height="29"/>
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
                                 <segments>
                                     <segment title="Plan"/>
                                     <segment title="Work"/>
                                 </segments>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HCj-GT-dvy">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rl-n4-aui" userLabel="Add Task">
-                                <rect key="frame" x="164" y="603" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="3OY-5d-BTb"/>
-                                    <constraint firstAttribute="width" constant="48" id="Ntb-VN-Zzi"/>
-                                </constraints>
+                                <rect key="frame" x="177" y="629" width="22" height="22"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="addTaskPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p6i-yL-g5u"/>
+                                    <segue destination="2Mo-bv-5HB" kind="show" id="CXQ-1i-QhR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -58,12 +55,87 @@
                             <constraint firstItem="kdF-rm-PAg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yiD-cS-fgS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="yPX-fk-jFm"/>
                     <connections>
                         <outlet property="modeSegmentedControl" destination="kdF-rm-PAg" id="uOy-if-ulc"/>
                         <outlet property="tasksTableView" destination="HCj-GT-dvy" id="4ye-4t-2X8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056.8" y="122.78860569715144"/>
+        </scene>
+        <!--New Task-->
+        <scene sceneID="2ER-qk-AnF">
+            <objects>
+                <viewController title="New Task" id="2Mo-bv-5HB" customClass="NewTaskViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a1a-DH-r3V"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fm4-1P-hVi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HOi-Fj-ynz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ol2-uS-bS8">
+                                <rect key="frame" x="0.0" y="110" width="375" height="30"/>
+                                <state key="normal" title="Add to list"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="2Mo-bv-5HB" eventType="touchUpInside" id="FhY-m9-v1y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCI-DT-7mc">
+                                <rect key="frame" x="0.0" y="148" width="375" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Start task now"/>
+                                <connections>
+                                    <action selector="startButtonPressed:" destination="2Mo-bv-5HB" eventType="touchUpInside" id="AZF-DH-qeG"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter task description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Boa-KS-AIU">
+                                <rect key="frame" x="16" y="72" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nCI-DT-7mc" firstAttribute="top" secondItem="ol2-uS-bS8" secondAttribute="bottom" constant="8" id="2EM-kB-gCu"/>
+                            <constraint firstItem="Boa-KS-AIU" firstAttribute="centerX" secondItem="HOi-Fj-ynz" secondAttribute="centerX" id="ASW-tP-cpf"/>
+                            <constraint firstItem="Boa-KS-AIU" firstAttribute="top" secondItem="a1a-DH-r3V" secondAttribute="bottom" constant="8" id="Fdw-Uk-054"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Boa-KS-AIU" secondAttribute="leading" id="KBY-a4-oLD"/>
+                            <constraint firstItem="ol2-uS-bS8" firstAttribute="top" secondItem="Boa-KS-AIU" secondAttribute="bottom" constant="8" id="Q6B-2d-vJ8"/>
+                            <constraint firstItem="nCI-DT-7mc" firstAttribute="leading" secondItem="HOi-Fj-ynz" secondAttribute="leading" id="RcE-h0-l9O"/>
+                            <constraint firstAttribute="trailing" secondItem="ol2-uS-bS8" secondAttribute="trailing" id="a8u-2p-SMP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Boa-KS-AIU" secondAttribute="trailing" id="kji-2J-JDM"/>
+                            <constraint firstAttribute="trailing" secondItem="nCI-DT-7mc" secondAttribute="trailing" id="kva-Me-wig"/>
+                            <constraint firstItem="ol2-uS-bS8" firstAttribute="leading" secondItem="HOi-Fj-ynz" secondAttribute="leading" id="nKz-GB-qbY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="taskTextField" destination="Boa-KS-AIU" id="z2C-2f-WFF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXg-Xq-IHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1808.8" y="122.78860569715144"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8jG-4f-hZ0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eaP-CI-y8P" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qvj-fu-KNb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cxH-Rg-kdv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGI-Tn-MPq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
