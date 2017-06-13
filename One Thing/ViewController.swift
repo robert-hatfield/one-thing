@@ -35,7 +35,6 @@ class ViewController: UIViewController {
 
     func checkActiveTask() {
         guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
-        print("Active task: \(String(describing: activeTaskIndex))")
         for indexPath in indexPaths {
             let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
             

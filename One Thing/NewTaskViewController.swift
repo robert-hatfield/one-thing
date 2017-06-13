@@ -15,6 +15,7 @@ class NewTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.taskTextField.delegate = self
         self.mainVC = (self.navigationController?.viewControllers.first as? ViewController)!
         self.taskTextField.becomeFirstResponder()
     }
@@ -61,7 +62,6 @@ extension NewTaskViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         guard let text = textField.text, text != "" else { return false }
-        
         addTask(text)
         textField.text = ""
         return true
