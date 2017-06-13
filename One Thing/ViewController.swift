@@ -96,13 +96,18 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         let task = self.allTasks[indexPath.row]
         cell.task = task
-        if task.isSelected {
-            cell.setSelected(true, animated: false)
-        }
-        if self.activeTasks.last == indexPath.row {
-            cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
-        }
         
+        switch task.isSelected {
+        case true:
+            if indexPath.row == self.activeTasks.last {
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+            } else {
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+            }
+        case false:
+            cell.taskImageView.image = #imageLiteral(resourceName: "task_default")
+        }
+
         cell.checkmarkButton.tag = indexPath.row
         cell.checkmarkButton.addTarget(self, action: #selector(ViewController.taskCompleted), for: UIControlEvents.touchUpInside)
         
