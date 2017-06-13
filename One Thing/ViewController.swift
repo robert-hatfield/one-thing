@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class ViewController: UIViewController {
     
@@ -31,6 +32,11 @@ class ViewController: UIViewController {
         self.tasksTableView.register(taskNib, forCellReuseIdentifier: TaskCell.identifier)
         self.tasksTableView.estimatedRowHeight = 50
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
+        
+        if let savedTasks = loadTasks() {
+            allTasks += savedTasks
+            checkActiveTask()
+        }
     }
 
     func checkActiveTask() {
@@ -61,19 +67,18 @@ class ViewController: UIViewController {
             }
             
         }
-        print(activeTasks)
+        print("Active tasks: \(activeTasks)")
     }
     
     //MARK: User actions
     func taskCompleted(sender: UIButton) {
-        print("Task completed for index \(sender.tag)")
         allTasks.remove(at: sender.tag)
         self.tasksTableView.reloadData()
         checkActiveTask()
+        saveTasks()
     }
     
     func taskWorked(sender: UIButton) {
-        print("Task \(sender.tag) worked, move to end")
         self.allTasks[sender.tag].isSelected = false
         allTasks.append(allTasks.remove(at: sender.tag))
         if let oldIndex = self.activeTasks.index(of: sender.tag) {
@@ -81,6 +86,21 @@ class ViewController: UIViewController {
         }
         self.tasksTableView.reloadData()
         checkActiveTask()
+        saveTasks()
+    }
+    
+    //MARK: Save & load tasks
+    func saveTasks() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allTasks, toFile: Task.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Tasks saved successfully.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Tasks NOT saved successfully.", log: OSLog.default, type: .error)
+        }
+    }
+    
+    func loadTasks() -> [Task]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Task.ArchiveURL.path) as? [Task]
     }
 }
 
@@ -135,6 +155,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         self.activeTasks.sort()
         selectedCell.isSelected = false
         checkActiveTask()
+        saveTasks()
     }
     
 }

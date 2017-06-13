@@ -24,6 +24,7 @@ class NewTaskViewController: UIViewController {
         guard let text = taskTextField.text, text != "" else { return }
         
         addTask(text)
+        self.mainVC?.saveTasks()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -47,7 +48,7 @@ class NewTaskViewController: UIViewController {
         newTask.isSelected = true
         mainVC?.activeTasks.append((mainVC?.allTasks.count)! - 1)
         
-        
+        self.mainVC?.saveTasks()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -63,6 +64,7 @@ extension NewTaskViewController : UITextFieldDelegate {
         
         guard let text = textField.text, text != "" else { return false }
         addTask(text)
+        self.mainVC?.saveTasks()
         textField.text = ""
         return true
     }
