@@ -35,14 +35,24 @@ class ViewController: UIViewController {
 
     func checkActiveTask() {
         guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
+        
+        // Reset activeTasks array; row assignments have changed
+        self.activeTasks.removeAll()
+        var index = 0
+            for task in allTasks {
+                if task.isSelected {
+                    self.activeTasks.append(index)
+                }
+            index += 1
+        }
+        
         for indexPath in indexPaths {
             let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
             
             switch self.allTasks[indexPath.row].isSelected {
             case true:
-                if indexPath.row == self.activeTasks.last || self.activeTasks.last == nil {
+                if indexPath.row == self.activeTasks.last {
                     cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
-                    self.activeTasks.append(indexPath.row)
                 } else {
                     cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
                 }
@@ -51,6 +61,7 @@ class ViewController: UIViewController {
             }
             
         }
+        print(activeTasks)
     }
     
     //MARK: User actions
@@ -58,10 +69,18 @@ class ViewController: UIViewController {
         print("Task completed for index \(sender.tag)")
         allTasks.remove(at: sender.tag)
         self.tasksTableView.reloadData()
+        checkActiveTask()
     }
     
     func taskWorked(sender: UIButton) {
         print("Task \(sender.tag) worked, move to end")
+        self.allTasks[sender.tag].isSelected = false
+        allTasks.append(allTasks.remove(at: sender.tag))
+        if let oldIndex = self.activeTasks.index(of: sender.tag) {
+            self.activeTasks.remove(at: oldIndex)
+        }
+        self.tasksTableView.reloadData()
+        checkActiveTask()
     }
 }
 
@@ -94,34 +113,25 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
-        selectedCell.task.isSelected = true
-        selectedCell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
-        self.allTasks[indexPath.row].isSelected = true
-        if self.activeTasks.last == nil || indexPath.row > self.activeTasks.last! {
-            activeTasks.append(indexPath.row)
+        let selectedTask = self.allTasks[indexPath.row]
+        
+        // Toggle selection state of task
+        selectedTask.isSelected = !selectedTask.isSelected
+        if selectedTask.isSelected {
+            if !self.activeTasks.contains(indexPath.row) {
+                self.activeTasks.append(indexPath.row)
+            }
+        } else {
+            if let activeTaskIndex = self.activeTasks.index(of: indexPath.row) {
+                self.activeTasks.remove(at: activeTaskIndex)
+            }
         }
-        print("Cell selected in delegate method")
+        
+        self.activeTasks.sort()
+        selectedCell.isSelected = false
         checkActiveTask()
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let deselectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
-        deselectedCell.task.isSelected = false
-        deselectedCell.taskImageView.image = #imageLiteral(resourceName: "task_default")
-        self.allTasks[indexPath.row].isSelected = false
-        
-        // reset task index
-        var index = 0
-        self.activeTasks.removeAll()
-        for task in allTasks {
-            if task.isSelected {
-                self.activeTasks.append(index)
-            }
-            index += 1
-        }
-        print("Cell DEselected in delegate method")
-        checkActiveTask()
-    }
 }
 
 //MARK: UITextField extension
