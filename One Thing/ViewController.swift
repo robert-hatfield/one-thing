@@ -33,6 +33,25 @@ class ViewController: UIViewController {
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    func checkActiveTask() {
+        guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
+        print("Active task: \(String(describing: activeTaskIndex))")
+        for indexPath in indexPaths {
+            let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
+            
+            switch self.allTasks[indexPath.row].isSelected {
+            case true:
+                if indexPath.row == self.activeTaskIndex || self.activeTaskIndex == nil {
+                    cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
+                } else {
+                    cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
+                }
+            case false:
+                cell.taskImageView.image = #imageLiteral(resourceName: "task_default")
+            }
+            
+        }
+    }
 }
 
 //MARK: UITableView extension
@@ -61,7 +80,11 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         selectedCell.task.isSelected = true
         selectedCell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
         self.allTasks[indexPath.row].isSelected = true
+        if self.activeTaskIndex == nil || indexPath.row > self.activeTaskIndex! {
+            activeTaskIndex = indexPath.row
+        }
         print("Cell selected in delegate method")
+        checkActiveTask()
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -69,7 +92,18 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         deselectedCell.task.isSelected = false
         deselectedCell.taskImageView.image = #imageLiteral(resourceName: "task_default")
         self.allTasks[indexPath.row].isSelected = false
+        
+        // reset task index
+        var index = 0
+        self.activeTaskIndex = nil
+        for task in allTasks {
+            if task.isSelected {
+                self.activeTaskIndex = index
+            }
+            index += 1
+        }
         print("Cell DEselected in delegate method")
+        checkActiveTask()
     }
 }
 
