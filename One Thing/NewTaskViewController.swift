@@ -15,8 +15,8 @@ class NewTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.taskTextField.delegate = self
         self.mainVC = (self.navigationController?.viewControllers.first as? ViewController)!
+        self.taskTextField.delegate = self
         self.taskTextField.becomeFirstResponder()
     }
 
