@@ -26,8 +26,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        
         self.tasksTableView.dataSource = self
         self.tasksTableView.delegate = self
+        
         let taskNib = UINib(nibName: "TaskCell", bundle: nil)
         self.tasksTableView.register(taskNib, forCellReuseIdentifier: TaskCell.identifier)
         self.tasksTableView.estimatedRowHeight = 50
@@ -35,23 +39,42 @@ class ViewController: UIViewController {
         
         if let savedTasks = loadTasks() {
             allTasks += savedTasks
-            checkActiveTask()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkActiveTask()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
+    func adjustViewForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            tasksTableView.contentInset = UIEdgeInsets.zero
+        } else {
+            tasksTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
+        
+        tasksTableView.scrollIndicatorInsets = tasksTableView.contentInset
+        
+    }
+    
+    
     func checkActiveTask() {
-        guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
         
         // Reset activeTasks array; row assignments have changed
         self.activeTasks.removeAll()
@@ -62,6 +85,8 @@ class ViewController: UIViewController {
                 }
             index += 1
         }
+        
+        guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
         
         for indexPath in indexPaths {
             let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
