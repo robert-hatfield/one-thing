@@ -15,8 +15,8 @@ class NewTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.taskTextField.delegate = self
         self.mainVC = (self.navigationController?.viewControllers.first as? ViewController)!
+        self.taskTextField.delegate = self
         self.taskTextField.becomeFirstResponder()
     }
 
@@ -24,6 +24,8 @@ class NewTaskViewController: UIViewController {
         guard let text = taskTextField.text, text != "" else { return }
         
         addTask(text)
+        self.mainVC?.saveTasks()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -47,7 +49,8 @@ class NewTaskViewController: UIViewController {
         newTask.isSelected = true
         mainVC?.activeTasks.append((mainVC?.allTasks.count)! - 1)
         
-        
+        self.mainVC?.saveTasks()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -63,6 +66,7 @@ extension NewTaskViewController : UITextFieldDelegate {
         
         guard let text = textField.text, text != "" else { return false }
         addTask(text)
+        self.mainVC?.saveTasks()
         textField.text = ""
         return true
     }
