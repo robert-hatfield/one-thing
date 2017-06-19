@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     //MARK: Properties
     var allTasks = [Task]() {
         didSet {
+            checkActiveTask()
             self.tasksTableView.reloadData()
         }
     }
@@ -47,11 +48,6 @@ class ViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkActiveTask()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -76,7 +72,7 @@ class ViewController: UIViewController {
     
     func checkActiveTask() {
         
-        // Reset activeTasks array; row assignments have changed
+        // Reset activeTasks array; row assignments may have changed
         self.activeTasks.removeAll()
         var index = 0
             for task in allTasks {
@@ -86,31 +82,12 @@ class ViewController: UIViewController {
             index += 1
         }
         
-        guard let indexPaths = self.tasksTableView.indexPathsForVisibleRows else { return }
-        
-        for indexPath in indexPaths {
-            let cell = tasksTableView.cellForRow(at: indexPath) as! TaskCell
-            
-            switch self.allTasks[indexPath.row].isSelected {
-            case true:
-                if indexPath.row == self.activeTasks.last {
-                    cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
-                } else {
-                    cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
-                }
-            case false:
-                cell.taskImageView.image = #imageLiteral(resourceName: "task_default")
-            }
-            
-        }
         print("Active tasks: \(activeTasks)")
     }
     
     //MARK: User actions
     func taskCompleted(sender: UIButton) {
         allTasks.remove(at: sender.tag)
-        self.tasksTableView.reloadData()
-        checkActiveTask()
         saveTasks()
     }
     
@@ -120,8 +97,7 @@ class ViewController: UIViewController {
         if let oldIndex = self.activeTasks.index(of: sender.tag) {
             self.activeTasks.remove(at: oldIndex)
         }
-        self.tasksTableView.reloadData()
-        checkActiveTask()
+        
         saveTasks()
     }
     
@@ -195,6 +171,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         self.activeTasks.sort()
         selectedCell.isSelected = false
         checkActiveTask()
+        tasksTableView.reloadData()
         saveTasks()
     }
     
