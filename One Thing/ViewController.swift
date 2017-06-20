@@ -16,20 +16,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     
     //MARK: Properties
-//    var allTasks = [Task]() {
-//        didSet {
-//            checkActiveTask()
-//            self.tasksTableView.reloadData()
-//        }
-//    }
-//    var activeTasks = [Int]()
     var taskList = TaskList.sharedInstance
     
+    //MARK: View Controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: NSNotification.Name(rawValue: "AllTasksModified"), object: nil)
         
         self.tasksTableView.dataSource = self
         self.tasksTableView.delegate = self
@@ -54,6 +49,7 @@ class ViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    //MARK: Custom methods
     func adjustViewForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
         
@@ -70,6 +66,21 @@ class ViewController: UIViewController {
         
     }
     
+    func updateTableView() {
+        
+        // Reset activeTasks array; row assignments may have changed
+        taskList.activeTasks.removeAll()
+        var index = 0
+        for task in taskList.allTasks {
+            if task.isSelected {
+                taskList.activeTasks.append(index)
+            }
+            index += 1
+        }
+        print("Active tasks: \(taskList.activeTasks)")
+        
+        self.tasksTableView.reloadData()
+    }
     
     func checkActiveTask() {
         
@@ -102,19 +113,6 @@ class ViewController: UIViewController {
         taskList.saveTasks()
     }
     
-    //MARK: Save & load tasks
-//    func saveTasks() {
-//        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allTasks, toFile: Task.ArchiveURL.path)
-//        if isSuccessfulSave {
-//            os_log("Tasks saved successfully.", log: OSLog.default, type: .debug)
-//        } else {
-//            os_log("Tasks NOT saved successfully.", log: OSLog.default, type: .error)
-//        }
-//    }
-//    
-//    func loadTasks() -> [Task]? {
-//        return NSKeyedUnarchiver.unarchiveObject(withFile: Task.ArchiveURL.path) as? [Task]
-//    }
 }
 
 //MARK: UITableView extension

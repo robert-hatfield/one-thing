@@ -10,7 +10,11 @@ import Foundation
 import os.log
 
 class TaskList {
-    var allTasks = [Task]()
+    var allTasks = [Task]() {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AllTasksModified"), object: nil)
+        }
+    }
     var activeTasks = [Int]()
 
     static let sharedInstance = TaskList()
