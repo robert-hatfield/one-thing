@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eaP-CI-y8P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,24 +22,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
-                                <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <segments>
-                                    <segment title="Plan"/>
-                                    <segment title="Work"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HCj-GT-dvy">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rl-n4-aui" userLabel="Add Task">
                                 <rect key="frame" x="177" y="629" width="22" height="22"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="2Mo-bv-5HB" kind="show" id="CXQ-1i-QhR"/>
+                                    <segue destination="2Mo-bv-5HB" kind="presentation" id="CXQ-1i-QhR"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
+                                <rect key="frame" x="16" y="28" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Plan"/>
+                                    <segment title="Work"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -77,6 +77,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oie-No-fWb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="BKO-Ou-43l">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kWX-9G-x15">
+                                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="2Mo-bv-5HB" id="TcM-T7-6Eq"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ol2-uS-bS8">
                                 <rect key="frame" x="0.0" y="110" width="375" height="30"/>
                                 <state key="normal" title="Add to list"/>
@@ -85,7 +98,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCI-DT-7mc">
-                                <rect key="frame" x="0.0" y="148" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="156" width="375" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="Start task now"/>
                                 <connections>
@@ -101,13 +114,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nCI-DT-7mc" firstAttribute="top" secondItem="ol2-uS-bS8" secondAttribute="bottom" constant="8" id="2EM-kB-gCu"/>
+                            <constraint firstItem="Oie-No-fWb" firstAttribute="width" secondItem="HOi-Fj-ynz" secondAttribute="width" id="06E-oB-azS"/>
+                            <constraint firstItem="nCI-DT-7mc" firstAttribute="top" secondItem="ol2-uS-bS8" secondAttribute="bottom" constant="16" id="2EM-kB-gCu"/>
                             <constraint firstItem="Boa-KS-AIU" firstAttribute="centerX" secondItem="HOi-Fj-ynz" secondAttribute="centerX" id="ASW-tP-cpf"/>
-                            <constraint firstItem="Boa-KS-AIU" firstAttribute="top" secondItem="a1a-DH-r3V" secondAttribute="bottom" constant="8" id="Fdw-Uk-054"/>
+                            <constraint firstItem="Boa-KS-AIU" firstAttribute="top" secondItem="Oie-No-fWb" secondAttribute="bottom" constant="8" id="JCo-Ve-SaJ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Boa-KS-AIU" secondAttribute="leading" id="KBY-a4-oLD"/>
+                            <constraint firstItem="Oie-No-fWb" firstAttribute="centerX" secondItem="HOi-Fj-ynz" secondAttribute="centerX" id="Od2-Ia-xgV"/>
                             <constraint firstItem="ol2-uS-bS8" firstAttribute="top" secondItem="Boa-KS-AIU" secondAttribute="bottom" constant="8" id="Q6B-2d-vJ8"/>
                             <constraint firstItem="nCI-DT-7mc" firstAttribute="leading" secondItem="HOi-Fj-ynz" secondAttribute="leading" id="RcE-h0-l9O"/>
                             <constraint firstAttribute="trailing" secondItem="ol2-uS-bS8" secondAttribute="trailing" id="a8u-2p-SMP"/>
+                            <constraint firstItem="Oie-No-fWb" firstAttribute="top" secondItem="a1a-DH-r3V" secondAttribute="bottom" id="h3u-1k-gxJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Boa-KS-AIU" secondAttribute="trailing" id="kji-2J-JDM"/>
                             <constraint firstAttribute="trailing" secondItem="nCI-DT-7mc" secondAttribute="trailing" id="kva-Me-wig"/>
                             <constraint firstItem="ol2-uS-bS8" firstAttribute="leading" secondItem="HOi-Fj-ynz" secondAttribute="leading" id="nKz-GB-qbY"/>
@@ -120,24 +136,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXg-Xq-IHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1808.8" y="122.78860569715144"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="8jG-4f-hZ0">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eaP-CI-y8P" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qvj-fu-KNb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cxH-Rg-kdv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGI-Tn-MPq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
     </scenes>
 </document>
