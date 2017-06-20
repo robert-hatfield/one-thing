@@ -12,6 +12,7 @@ class NewTaskViewController: UIViewController {
 
     @IBOutlet weak var taskTextField: UITextField!
     var mainVC : ViewController?
+    var taskList = TaskList.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class NewTaskViewController: UIViewController {
         guard let text = taskTextField.text, text != "" else { return }
         
         addTask(text)
-        self.mainVC?.saveTasks()
+        taskList.saveTasks()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
@@ -33,10 +34,10 @@ class NewTaskViewController: UIViewController {
         guard let text = taskTextField.text, text != "" else { return }
         
         // If there is already an active task, remove its indicator
-        if let priorActiveIndex = mainVC?.activeTasks.last {
+        if let priorActiveIndex = taskList.activeTasks.last {
             let indexPath = IndexPath(row: priorActiveIndex, section: 0)
             let priorActiveCell = mainVC?.tasksTableView.cellForRow(at: indexPath) as? TaskCell
-            if let priorTask = mainVC?.allTasks[priorActiveIndex], priorTask.isSelected == true {
+            if taskList.allTasks[priorActiveIndex].isSelected == true {
                 priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_selected")
             } else {
                 priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_default")
@@ -45,18 +46,18 @@ class NewTaskViewController: UIViewController {
         
         addTask(text)
         
-        guard let newTask = self.mainVC?.allTasks.last else { return }
+        guard let newTask = taskList.allTasks.last else { return }
         newTask.isSelected = true
-        mainVC?.activeTasks.append((mainVC?.allTasks.count)! - 1)
+        taskList.activeTasks.append((taskList.allTasks.count) - 1)
         
-        self.mainVC?.saveTasks()
+        taskList.saveTasks()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     
     func addTask(_ text : String) {
         let newTask = Task(text: text)
-        self.mainVC?.allTasks.append(newTask)
+        taskList.allTasks.append(newTask)
     }
     
 }
@@ -66,7 +67,7 @@ extension NewTaskViewController : UITextFieldDelegate {
         
         guard let text = textField.text, text != "" else { return false }
         addTask(text)
-        self.mainVC?.saveTasks()
+        taskList.saveTasks()
         textField.text = ""
         return true
     }
