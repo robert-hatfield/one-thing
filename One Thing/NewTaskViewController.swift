@@ -11,38 +11,32 @@ import UIKit
 class NewTaskViewController: UIViewController {
 
     @IBOutlet weak var taskTextField: UITextField!
-    var mainVC : ViewController?
     var taskList = TaskList.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mainVC = (self.navigationController?.viewControllers.first as? ViewController)!
+
         self.taskTextField.delegate = self
         self.taskTextField.becomeFirstResponder()
     }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.taskTextField.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
     @IBAction func addButtonPressed(_ sender: Any) {
         guard let text = taskTextField.text, text != "" else { return }
         
         addTask(text)
         taskList.saveTasks()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.popViewController(animated: true)
+        self.taskTextField.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func startButtonPressed(_ sender: Any) {
         guard let text = taskTextField.text, text != "" else { return }
-        
-        // If there is already an active task, remove its indicator
-        if let priorActiveIndex = taskList.activeTasks.last {
-            let indexPath = IndexPath(row: priorActiveIndex, section: 0)
-            let priorActiveCell = mainVC?.tasksTableView.cellForRow(at: indexPath) as? TaskCell
-            if taskList.allTasks[priorActiveIndex].isSelected == true {
-                priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_selected")
-            } else {
-                priorActiveCell?.taskImageView.image = #imageLiteral(resourceName: "task_default")
-            }
-        }
         
         addTask(text)
         
@@ -51,8 +45,8 @@ class NewTaskViewController: UIViewController {
         taskList.activeTasks.append((taskList.allTasks.count) - 1)
         
         taskList.saveTasks()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.popViewController(animated: true)
+        self.taskTextField.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func addTask(_ text : String) {
