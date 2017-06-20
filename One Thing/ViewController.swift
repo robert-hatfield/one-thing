@@ -16,19 +16,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     
     //MARK: Properties
-    var allTasks = [Task]() {
-        didSet {
-            checkActiveTask()
-            self.tasksTableView.reloadData()
-        }
-    }
-    var activeTasks = [Int]()
-
+    var taskList = TaskList.sharedInstance
+    
+    //MARK: View Controller methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustViewForKeyboard(notification:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: NSNotification.Name(rawValue: "AllTasksModified"), object: nil)
         
         self.tasksTableView.dataSource = self
         self.tasksTableView.delegate = self
@@ -38,8 +34,8 @@ class ViewController: UIViewController {
         self.tasksTableView.estimatedRowHeight = 50
         self.tasksTableView.rowHeight = UITableViewAutomaticDimension
         
-        if let savedTasks = loadTasks() {
-            allTasks += savedTasks
+        if let savedTasks = taskList.loadTasks() {
+            taskList.allTasks += savedTasks
         }
     }
     
@@ -53,6 +49,7 @@ class ViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    //MARK: Custom methods
     func adjustViewForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
         
@@ -69,69 +66,71 @@ class ViewController: UIViewController {
         
     }
     
+    func updateTableView() {
+        
+        // Reset activeTasks array; row assignments may have changed
+        taskList.activeTasks.removeAll()
+        var index = 0
+        for task in taskList.allTasks {
+            if task.isSelected {
+                taskList.activeTasks.append(index)
+            }
+            index += 1
+        }
+        print("Active tasks: \(taskList.activeTasks)")
+        
+        self.tasksTableView.reloadData()
+    }
     
     func checkActiveTask() {
         
         // Reset activeTasks array; row assignments may have changed
-        self.activeTasks.removeAll()
+        taskList.activeTasks.removeAll()
         var index = 0
-            for task in allTasks {
+            for task in taskList.allTasks {
                 if task.isSelected {
-                    self.activeTasks.append(index)
+                    taskList.activeTasks.append(index)
                 }
             index += 1
         }
         
-        print("Active tasks: \(activeTasks)")
+        print("Active tasks: \(taskList.activeTasks)")
     }
     
     //MARK: User actions
     func taskCompleted(sender: UIButton) {
-        allTasks.remove(at: sender.tag)
-        saveTasks()
+        taskList.allTasks.remove(at: sender.tag)
+        taskList.saveTasks()
     }
     
     func taskWorked(sender: UIButton) {
-        self.allTasks[sender.tag].isSelected = false
-        allTasks.append(allTasks.remove(at: sender.tag))
-        if let oldIndex = self.activeTasks.index(of: sender.tag) {
-            self.activeTasks.remove(at: oldIndex)
+        taskList.allTasks[sender.tag].isSelected = false
+        taskList.allTasks.append(taskList.allTasks.remove(at: sender.tag))
+        if let oldIndex = taskList.activeTasks.index(of: sender.tag) {
+            taskList.activeTasks.remove(at: oldIndex)
         }
         
-        saveTasks()
+        taskList.saveTasks()
     }
     
-    //MARK: Save & load tasks
-    func saveTasks() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(allTasks, toFile: Task.ArchiveURL.path)
-        if isSuccessfulSave {
-            os_log("Tasks saved successfully.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Tasks NOT saved successfully.", log: OSLog.default, type: .error)
-        }
-    }
-    
-    func loadTasks() -> [Task]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Task.ArchiveURL.path) as? [Task]
-    }
 }
 
 //MARK: UITableView extension
 extension ViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allTasks.count
+        return taskList.allTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.identifier, for: indexPath) as! TaskCell
         cell.selectionStyle = .none
-        let task = self.allTasks[indexPath.row]
+        let task = taskList.allTasks[indexPath.row]
         cell.task = task
         
         switch task.isSelected {
         case true:
-            if indexPath.row == self.activeTasks.last {
+            if indexPath.row == taskList.activeTasks.last {
                 cell.taskImageView.image = #imageLiteral(resourceName: "task_active")
             } else {
                 cell.taskImageView.image = #imageLiteral(resourceName: "task_selected")
@@ -154,25 +153,25 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! TaskCell
-        let selectedTask = self.allTasks[indexPath.row]
+        let selectedTask = taskList.allTasks[indexPath.row]
         
         // Toggle selection state of task
         selectedTask.isSelected = !selectedTask.isSelected
         if selectedTask.isSelected {
-            if !self.activeTasks.contains(indexPath.row) {
-                self.activeTasks.append(indexPath.row)
+            if !taskList.activeTasks.contains(indexPath.row) {
+                taskList.activeTasks.append(indexPath.row)
             }
         } else {
-            if let activeTaskIndex = self.activeTasks.index(of: indexPath.row) {
-                self.activeTasks.remove(at: activeTaskIndex)
+            if let activeTaskIndex = taskList.activeTasks.index(of: indexPath.row) {
+                taskList.activeTasks.remove(at: activeTaskIndex)
             }
         }
         
-        self.activeTasks.sort()
+        taskList.activeTasks.sort()
         selectedCell.isSelected = false
         checkActiveTask()
         tasksTableView.reloadData()
-        saveTasks()
+        taskList.saveTasks()
     }
     
 }
@@ -188,11 +187,11 @@ extension ViewController : UITextFieldDelegate {
         print("Done editing in cell \(textField.tag)")
         let editedTaskIndex = textField.tag
         guard let newText = textField.text else { return false }
-        if newText != allTasks[editedTaskIndex].text && newText != "" {
-            allTasks[editedTaskIndex].text = newText
-            saveTasks()
+        if newText != taskList.allTasks[editedTaskIndex].text && newText != "" {
+            taskList.allTasks[editedTaskIndex].text = newText
+            taskList.saveTasks()
         } else {
-           textField.text = allTasks[editedTaskIndex].text
+           textField.text = taskList.allTasks[editedTaskIndex].text
         }
         return true
     }
