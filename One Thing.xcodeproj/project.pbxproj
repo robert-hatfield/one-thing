@@ -10,6 +10,7 @@
 		6203E1111EE0A4A900E8849E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6203E1101EE0A4A900E8849E /* Task.swift */; };
 		6203E1131EE0C14000E8849E /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6203E1121EE0C14000E8849E /* UIExtensions.swift */; };
 		62189EA51EF89A4F00F269D2 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62189EA41EF89A4F00F269D2 /* TaskList.swift */; };
+		62189ECE1EFA07BC00F269D2 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62189ECD1EFA07BC00F269D2 /* PlanningViewController.swift */; };
 		628141C41EEB221100F131DE /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628141C31EEB221100F131DE /* NewTaskViewController.swift */; };
 		62BC93611EDF4CDC003F86F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC93601EDF4CDC003F86F6 /* AppDelegate.swift */; };
 		62BC93631EDF4CDC003F86F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC93621EDF4CDC003F86F6 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 		6203E1101EE0A4A900E8849E /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6203E1121EE0C14000E8849E /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		62189EA41EF89A4F00F269D2 /* TaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		62189ECD1EFA07BC00F269D2 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningViewController.swift; sourceTree = "<group>"; };
 		628141C31EEB221100F131DE /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		62BC935D1EDF4CDC003F86F6 /* One Thing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "One Thing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62BC93601EDF4CDC003F86F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		62BC93761EDF5222003F86F6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				62189ECD1EFA07BC00F269D2 /* PlanningViewController.swift */,
 				628141C31EEB221100F131DE /* NewTaskViewController.swift */,
 				62BC93621EDF4CDC003F86F6 /* ViewController.swift */,
 			);
@@ -193,6 +196,7 @@
 				62BC93631EDF4CDC003F86F6 /* ViewController.swift in Sources */,
 				6203E1111EE0A4A900E8849E /* Task.swift in Sources */,
 				6203E1131EE0C14000E8849E /* UIExtensions.swift in Sources */,
+				62189ECE1EFA07BC00F269D2 /* PlanningViewController.swift in Sources */,
 				628141C41EEB221100F131DE /* NewTaskViewController.swift in Sources */,
 				62BC93611EDF4CDC003F86F6 /* AppDelegate.swift in Sources */,
 			);
