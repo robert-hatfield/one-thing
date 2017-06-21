@@ -18,13 +18,19 @@ class PlanningViewController: UIViewController {
     var firstIndex = 0
     var secondIndex = 1
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         taskList.activeTasks = [0]
         taskList.allTasks.first?.isSelected = true
         
         updateTextFields()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        taskList.saveTasks()
     }
 
     func updateTextFields() {
@@ -52,6 +58,7 @@ class PlanningViewController: UIViewController {
     
     @IBAction func yesButtonPressed(_ sender: Any) {
         taskList.allTasks[secondIndex].isSelected = true
+        taskList.activeTasks.append(secondIndex)
         secondIndex += 1
         updateTextFields()
     }

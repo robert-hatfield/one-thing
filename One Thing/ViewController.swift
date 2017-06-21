@@ -42,6 +42,8 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        tasksTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,6 +82,15 @@ class ViewController: UIViewController {
         print("Active tasks: \(taskList.activeTasks)")
         
         self.tasksTableView.reloadData()
+        
+        guard let planningVC = self.tabBarController?.viewControllers?[1] else { return }
+        
+        if taskList.allTasks.count >= 2 {
+            
+            planningVC.tabBarItem.isEnabled = true
+        } else {
+            planningVC.tabBarItem.isEnabled = false
+        }
     }
     
     func checkActiveTask() {
