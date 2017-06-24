@@ -37,8 +37,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
                                 <rect key="frame" x="16" y="28" width="343" height="29"/>
                                 <segments>
-                                    <segment title="Plan"/>
-                                    <segment title="Work"/>
+                                    <segment title="All Tasks"/>
+                                    <segment title="Selected Tasks"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -56,7 +56,7 @@
                             <constraint firstItem="kdF-rm-PAg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yiD-cS-fgS"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Working" id="4gC-LJ-g8H"/>
+                    <tabBarItem key="tabBarItem" title="Tasks" id="4gC-LJ-g8H"/>
                     <navigationItem key="navigationItem" id="yPX-fk-jFm"/>
                     <connections>
                         <outlet property="modeSegmentedControl" destination="kdF-rm-PAg" id="uOy-if-ulc"/>
@@ -202,6 +202,51 @@
             </objects>
             <point key="canvasLocation" x="2852" y="122.78860569715144"/>
         </scene>
+        <!--Help / About-->
+        <scene sceneID="inp-iK-GbA">
+            <objects>
+                <viewController title="Help / About" id="6Si-Xs-usR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a7a-Oi-8VN"/>
+                        <viewControllerLayoutGuide type="bottom" id="xQy-Fz-xCh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="byc-8z-m8p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Use This App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcX-Ow-wCr">
+                                <rect key="frame" x="0.0" y="28" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GTK-Yu-wqP">
+                                <rect key="frame" x="8" y="57" width="359" height="561"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GTK-Yu-wqP" firstAttribute="centerX" secondItem="byc-8z-m8p" secondAttribute="centerX" id="Aag-kK-zp3"/>
+                            <constraint firstItem="xQy-Fz-xCh" firstAttribute="top" secondItem="GTK-Yu-wqP" secondAttribute="bottom" id="AfK-w7-s0q"/>
+                            <constraint firstItem="pcX-Ow-wCr" firstAttribute="top" secondItem="a7a-Oi-8VN" secondAttribute="bottom" constant="8" id="HkG-hT-4Rk"/>
+                            <constraint firstItem="GTK-Yu-wqP" firstAttribute="top" secondItem="pcX-Ow-wCr" secondAttribute="bottom" constant="8" id="XOf-1I-Gq1"/>
+                            <constraint firstAttribute="trailing" secondItem="GTK-Yu-wqP" secondAttribute="trailing" constant="8" id="Xzl-7V-7wB"/>
+                            <constraint firstAttribute="trailing" secondItem="pcX-Ow-wCr" secondAttribute="trailing" id="neK-ch-oSO"/>
+                            <constraint firstItem="pcX-Ow-wCr" firstAttribute="leading" secondItem="byc-8z-m8p" secondAttribute="leading" id="uwR-jv-sYv"/>
+                            <constraint firstItem="GTK-Yu-wqP" firstAttribute="leading" secondItem="byc-8z-m8p" secondAttribute="leading" constant="8" id="waF-GC-Nra"/>
+                            <constraint firstItem="pcX-Ow-wCr" firstAttribute="centerX" secondItem="byc-8z-m8p" secondAttribute="centerX" id="wcE-Br-M7R"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Help / About" id="5zF-vH-Iaq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ryj-Mh-Q7u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3626" y="136"/>
+        </scene>
         <!--New Task-->
         <scene sceneID="2ER-qk-AnF">
             <objects>
@@ -287,11 +332,12 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="YND-j0-flH"/>
                         <segue destination="mw5-ag-MvP" kind="relationship" relationship="viewControllers" id="MXS-Qx-ZUa"/>
+                        <segue destination="6Si-Xs-usR" kind="relationship" relationship="viewControllers" id="Tco-Ln-D8n"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNw-lq-h7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056.8" y="122.78860569715144"/>
+            <point key="canvasLocation" x="2436" y="-705"/>
         </scene>
     </scenes>
 </document>
