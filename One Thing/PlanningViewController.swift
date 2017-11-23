@@ -29,6 +29,7 @@ class PlanningViewController: UIViewController {
         secondIndex = 1
         print("firstIndex: \(firstIndex) \nsecondIndex: \(secondIndex)")
         taskList.activeTasks = [0]
+        progressRingView.value = 0.0
         taskList.allTasks.first?.isSelected = true
         
         updateView()
