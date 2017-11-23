@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HQ-fr-P0d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HQ-fr-P0d">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,7 +46,6 @@
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HCj-GT-dvy" secondAttribute="bottom" id="36J-28-EfY"/>
                             <constraint firstAttribute="trailing" secondItem="HCj-GT-dvy" secondAttribute="trailing" id="BF1-kJ-bZ2"/>
-                            <constraint firstItem="kdF-rm-PAg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RYa-Kd-LEZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kdF-rm-PAg" secondAttribute="trailing" id="ZWt-hv-C8N"/>
                             <constraint firstItem="9Rl-n4-aui" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ckU-gW-zc8"/>
                             <constraint firstItem="kdF-rm-PAg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="mIs-Ya-PFO"/>
@@ -107,10 +106,10 @@
                                 <rect key="frame" x="16" y="321.5" width="343" height="191"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-Qz-ADz">
-                                        <rect key="frame" x="115" y="0.0" width="113" height="39"/>
+                                        <rect key="frame" x="115.5" y="0.0" width="112" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bn-Gu-vuF">
-                                                <rect key="frame" x="0.0" y="0.0" width="35" height="39"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="34" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="Yes"/>
                                                 <connections>
@@ -118,7 +117,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjm-lU-EE2">
-                                                <rect key="frame" x="83" y="0.0" width="30" height="39"/>
+                                                <rect key="frame" x="82" y="0.0" width="30" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="No">
                                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,7 +130,7 @@
                                                 </connections>
                                             </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU6-0d-A6p">
-                                                <rect key="frame" x="113" y="0.0" width="0.0" height="39"/>
+                                                <rect key="frame" x="112" y="0.0" width="0.0" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -238,7 +237,6 @@
                             <constraint firstAttribute="trailing" secondItem="pcX-Ow-wCr" secondAttribute="trailing" id="neK-ch-oSO"/>
                             <constraint firstItem="pcX-Ow-wCr" firstAttribute="leading" secondItem="byc-8z-m8p" secondAttribute="leading" id="uwR-jv-sYv"/>
                             <constraint firstItem="GTK-Yu-wqP" firstAttribute="leading" secondItem="byc-8z-m8p" secondAttribute="leading" constant="8" id="waF-GC-Nra"/>
-                            <constraint firstItem="pcX-Ow-wCr" firstAttribute="centerX" secondItem="byc-8z-m8p" secondAttribute="centerX" id="wcE-Br-M7R"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Help / About" id="5zF-vH-Iaq"/>
@@ -298,7 +296,6 @@
                         <constraints>
                             <constraint firstItem="Oie-No-fWb" firstAttribute="width" secondItem="HOi-Fj-ynz" secondAttribute="width" id="06E-oB-azS"/>
                             <constraint firstItem="nCI-DT-7mc" firstAttribute="top" secondItem="ol2-uS-bS8" secondAttribute="bottom" constant="16" id="2EM-kB-gCu"/>
-                            <constraint firstItem="Boa-KS-AIU" firstAttribute="centerX" secondItem="HOi-Fj-ynz" secondAttribute="centerX" id="ASW-tP-cpf"/>
                             <constraint firstItem="Boa-KS-AIU" firstAttribute="top" secondItem="Oie-No-fWb" secondAttribute="bottom" constant="8" id="JCo-Ve-SaJ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Boa-KS-AIU" secondAttribute="leading" id="KBY-a4-oLD"/>
                             <constraint firstItem="Oie-No-fWb" firstAttribute="centerX" secondItem="HOi-Fj-ynz" secondAttribute="centerX" id="Od2-Ia-xgV"/>
