@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         
         tasksTableView.reloadData()
     }
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: Custom methods
-    func adjustViewForKeyboard(notification: Notification) {
+    @objc func adjustViewForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
         
         let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         
     }
     
-    func updateTableView() {
+    @objc func updateTableView() {
         
         // Reset activeTasks array; row assignments may have changed
         taskList.activeTasks.removeAll()
@@ -109,12 +109,12 @@ class ViewController: UIViewController {
     }
     
     //MARK: User actions
-    func taskCompleted(sender: UIButton) {
+    @objc func taskCompleted(sender: UIButton) {
         taskList.allTasks.remove(at: sender.tag)
         taskList.saveTasks()
     }
     
-    func taskWorked(sender: UIButton) {
+    @objc func taskWorked(sender: UIButton) {
         taskList.allTasks[sender.tag].isSelected = false
         taskList.allTasks.append(taskList.allTasks.remove(at: sender.tag))
         if let oldIndex = taskList.activeTasks.index(of: sender.tag) {

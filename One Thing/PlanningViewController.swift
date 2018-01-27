@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import UICircularProgressRing
 
 class PlanningViewController: UIViewController {
     @IBOutlet weak var firstTaskTextField: UITextField!
     @IBOutlet weak var secondTaskTextField: UITextField!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
-
+    @IBOutlet weak var progressRingView: UICircularProgressRingView!
+    @IBOutlet weak var doneLabel: UILabel!
+    
     var taskList = TaskList.sharedInstance
     var firstIndex = 0
     var secondIndex = 1
@@ -22,10 +25,14 @@ class PlanningViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        firstIndex = 0
+        secondIndex = 1
+        print("firstIndex: \(firstIndex) \nsecondIndex: \(secondIndex)")
         taskList.activeTasks = [0]
+        progressRingView.value = 0.0
         taskList.allTasks.first?.isSelected = true
         
-        updateTextFields()
+        updateView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -33,17 +40,27 @@ class PlanningViewController: UIViewController {
         taskList.saveTasks()
     }
 
-    func updateTextFields() {
+    func updateView() {
+        let progress : CGFloat = CGFloat(secondIndex - 1) / CGFloat(taskList.allTasks.count - 1) * 100
+        progressRingView.setProgress(value: progress, animationDuration: 0.2)
         
         // Verify indices are not out of bounds of the array.
         if secondIndex >= taskList.allTasks.count {
-            noButton.isEnabled = false
-            yesButton.isEnabled = false
+            noButton.isHidden = true
+            yesButton.isHidden = true
+            doneLabel.isHidden = false
             return
+        } else {
+            noButton.isHidden = false
+            yesButton.isHidden = false
+            doneLabel.isHidden = true
         }
         
         firstTaskTextField.text = taskList.allTasks[firstIndex].text
         secondTaskTextField.text = taskList.allTasks[secondIndex].text
+
+        print("Progress: \(progress)\nValue: \(progressRingView.value)")
+        print("\(secondIndex) / \(taskList.allTasks.count)")
     }
 
     
@@ -52,15 +69,16 @@ class PlanningViewController: UIViewController {
     @IBAction func noButtonPressed(_ sender: Any) {
         taskList.allTasks[secondIndex].isSelected = false
         secondIndex += 1
-        updateTextFields()
+        updateView()
     }
     
     
     @IBAction func yesButtonPressed(_ sender: Any) {
         taskList.allTasks[secondIndex].isSelected = true
         taskList.activeTasks.append(secondIndex)
+        firstIndex = taskList.activeTasks.last!
         secondIndex += 1
-        updateTextFields()
+        updateView()
     }
     
 }
