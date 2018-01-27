@@ -129,12 +129,15 @@
                                                     <action selector="noButtonPressed:" destination="mw5-ag-MvP" eventType="touchUpInside" id="85N-eL-4ED"/>
                                                 </connections>
                                             </button>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU6-0d-A6p">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgO-Yi-FoO" userLabel="Done Button">
                                                 <rect key="frame" x="112" y="0.0" width="0.0" height="39"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Ready to work!"/>
+                                                <connections>
+                                                    <action selector="doneButtonPressed" destination="mw5-ag-MvP" eventType="touchUpInside" id="aOy-ZG-T9P"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XG1-f2-LtQ" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
@@ -189,7 +192,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" enabled="NO" title="Planning" id="UWl-l2-gol"/>
                     <connections>
-                        <outlet property="doneLabel" destination="fU6-0d-A6p" id="QVY-wZ-351"/>
+                        <outlet property="doneButton" destination="WgO-Yi-FoO" id="uFP-tY-RhS"/>
                         <outlet property="firstTaskTextField" destination="XE4-1c-e7F" id="uMs-nC-v0u"/>
                         <outlet property="noButton" destination="yjm-lU-EE2" id="VTx-DL-z08"/>
                         <outlet property="progressRingView" destination="XG1-f2-LtQ" id="URI-M7-ZdD"/>
