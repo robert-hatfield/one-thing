@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HQ-fr-P0d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4HQ-fr-P0d">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Main" id="BYZ-38-t0r" userLabel="Main View Controller" customClass="ViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="BYZ-38-t0r" userLabel="Main View Controller" customClass="MainViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -34,7 +34,7 @@
                                     <segue destination="2Mo-bv-5HB" kind="presentation" id="CXQ-1i-QhR"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
                                 <rect key="frame" x="16" y="28" width="343" height="29"/>
                                 <segments>
                                     <segment title="All Tasks"/>
@@ -69,7 +69,7 @@
         <!--Planning View Controller-->
         <scene sceneID="MTo-AW-Wsw">
             <objects>
-                <viewController id="mw5-ag-MvP" userLabel="Planning View Controller" customClass="PlanningViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mw5-ag-MvP" userLabel="Planning View Controller" customClass="PlanningViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W60-N3-0um"/>
                         <viewControllerLayoutGuide type="bottom" id="IQM-vz-RBa"/>
@@ -129,12 +129,15 @@
                                                     <action selector="noButtonPressed:" destination="mw5-ag-MvP" eventType="touchUpInside" id="85N-eL-4ED"/>
                                                 </connections>
                                             </button>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU6-0d-A6p">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgO-Yi-FoO" userLabel="Done Button">
                                                 <rect key="frame" x="112" y="0.0" width="0.0" height="39"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Ready to work!"/>
+                                                <connections>
+                                                    <action selector="doneButtonPressed" destination="mw5-ag-MvP" eventType="touchUpInside" id="aOy-ZG-T9P"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XG1-f2-LtQ" customClass="UICircularProgressRingView" customModule="UICircularProgressRing">
@@ -189,7 +192,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" enabled="NO" title="Planning" id="UWl-l2-gol"/>
                     <connections>
-                        <outlet property="doneLabel" destination="fU6-0d-A6p" id="QVY-wZ-351"/>
+                        <outlet property="doneButton" destination="WgO-Yi-FoO" id="uFP-tY-RhS"/>
                         <outlet property="firstTaskTextField" destination="XE4-1c-e7F" id="uMs-nC-v0u"/>
                         <outlet property="noButton" destination="yjm-lU-EE2" id="VTx-DL-z08"/>
                         <outlet property="progressRingView" destination="XG1-f2-LtQ" id="URI-M7-ZdD"/>
@@ -204,7 +207,7 @@
         <!--Help / About-->
         <scene sceneID="inp-iK-GbA">
             <objects>
-                <viewController title="Help / About" id="6Si-Xs-usR" sceneMemberID="viewController">
+                <viewController title="Help / About" id="6Si-Xs-usR" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a7a-Oi-8VN"/>
                         <viewControllerLayoutGuide type="bottom" id="xQy-Fz-xCh"/>
@@ -248,7 +251,7 @@
         <!--New Task-->
         <scene sceneID="2ER-qk-AnF">
             <objects>
-                <viewController title="New Task" id="2Mo-bv-5HB" customClass="NewTaskViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New Task" id="2Mo-bv-5HB" customClass="NewTaskViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a1a-DH-r3V"/>
                         <viewControllerLayoutGuide type="bottom" id="Fm4-1P-hVi"/>
@@ -319,7 +322,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="D5S-jJ-DRk">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4HQ-fr-P0d" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4HQ-fr-P0d" propertyAccessControl="all" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="MyM-Hn-BIp">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

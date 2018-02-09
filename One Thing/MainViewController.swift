@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     //MARK: IBOutlets
     @IBOutlet weak var tasksTableView: UITableView!
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: UITableView extension
-extension ViewController : UITableViewDataSource, UITableViewDelegate {
+extension MainViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskList.allTasks.count
@@ -151,10 +151,10 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         }
 
         cell.checkmarkButton.tag = indexPath.row
-        cell.checkmarkButton.addTarget(self, action: #selector(ViewController.taskCompleted), for: UIControlEvents.touchUpInside)
+        cell.checkmarkButton.addTarget(self, action: #selector(MainViewController.taskCompleted), for: UIControlEvents.touchUpInside)
         
         cell.arrowButton.tag = indexPath.row
-        cell.arrowButton.addTarget(self, action: #selector(ViewController.taskWorked), for: UIControlEvents.touchUpInside)
+        cell.arrowButton.addTarget(self, action: #selector(MainViewController.taskWorked), for: UIControlEvents.touchUpInside)
         
         cell.taskTextField.tag = indexPath.row
         cell.taskTextField.delegate = self
@@ -188,7 +188,7 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
 }
 
 //MARK: UITextField extension
-extension ViewController : UITextFieldDelegate {
+extension MainViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
