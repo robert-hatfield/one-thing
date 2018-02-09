@@ -14,7 +14,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Main" id="BYZ-38-t0r" userLabel="Main View Controller" customClass="MainViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="BYZ-38-t0r" userLabel="Main View Controller" customClass="MainViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -34,7 +34,7 @@
                                     <segue destination="2Mo-bv-5HB" kind="presentation" id="CXQ-1i-QhR"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-rm-PAg">
                                 <rect key="frame" x="16" y="28" width="343" height="29"/>
                                 <segments>
                                     <segment title="All Tasks"/>
@@ -69,7 +69,7 @@
         <!--Planning View Controller-->
         <scene sceneID="MTo-AW-Wsw">
             <objects>
-                <viewController id="mw5-ag-MvP" userLabel="Planning View Controller" customClass="PlanningViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mw5-ag-MvP" userLabel="Planning View Controller" customClass="PlanningViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W60-N3-0um"/>
                         <viewControllerLayoutGuide type="bottom" id="IQM-vz-RBa"/>
@@ -207,7 +207,7 @@
         <!--Help / About-->
         <scene sceneID="inp-iK-GbA">
             <objects>
-                <viewController title="Help / About" id="6Si-Xs-usR" sceneMemberID="viewController">
+                <viewController title="Help / About" id="6Si-Xs-usR" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a7a-Oi-8VN"/>
                         <viewControllerLayoutGuide type="bottom" id="xQy-Fz-xCh"/>
@@ -251,7 +251,7 @@
         <!--New Task-->
         <scene sceneID="2ER-qk-AnF">
             <objects>
-                <viewController title="New Task" id="2Mo-bv-5HB" customClass="NewTaskViewController" customModule="One_Thing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New Task" id="2Mo-bv-5HB" customClass="NewTaskViewController" customModule="One_Thing" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a1a-DH-r3V"/>
                         <viewControllerLayoutGuide type="bottom" id="Fm4-1P-hVi"/>
@@ -322,7 +322,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="D5S-jJ-DRk">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4HQ-fr-P0d" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4HQ-fr-P0d" propertyAccessControl="all" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="MyM-Hn-BIp">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
