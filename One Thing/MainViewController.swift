@@ -85,7 +85,7 @@ class MainViewController: UIViewController {
         
         guard let planningVC = self.tabBarController?.viewControllers?[1] else { return }
         
-        if taskList.allTasks.count >= 2 {
+        if taskList.allTasks.count >= 3 {
             
             planningVC.tabBarItem.isEnabled = true
         } else {
